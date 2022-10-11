@@ -14,14 +14,18 @@ class RouteArr{
     RouteArr();
     ~RouteArr();
 
+    void menu();
+
+    private:
+
     void enterArr();
     void readArrFromFile(std::string& filePath);
 
+    void sortRoutesByNumber();
+
+    void printRoutes();
     void printRoutesWithSourceName(std::string& sourceName);
     void printRoutesWithDestinationName(std::string& destinationName);
 
-    //TODO sortRoutes
-
-    private:
     Route** routesArr = nullptr;
 };

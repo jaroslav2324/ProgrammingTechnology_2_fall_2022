@@ -3,7 +3,6 @@
 
 class Route{
     public:
-    Route();
 
     void setSourceName(std::string& sourceName);
     void setDestinationName(std::string& destinationName);
