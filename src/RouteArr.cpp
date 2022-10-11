@@ -50,9 +50,9 @@ void RouteArr::readArrFromFile(std::string& filePath){
         int numRoute;
 
         for (int i = 0; i < 8; i ++){
-            cin >> sourceName;
-            cin >> destinationName;
-            cin >> numRoute;
+            file >> sourceName;
+            file >> destinationName;
+            file >> numRoute;
 
             if ( ! file.good())
             throw WrongFileContentError();

@@ -4,17 +4,19 @@ using std::cout;
 using std::endl;
 
 #include "RouteArr.h"
+#include "DoubleDigitFinder.h"
 
 int main(){
 
     RouteArr routeArr;
+    DoubleDigitFinder finder;
 
     while(true){
 
         bool exitWhile = false;
 
         clearTerminal();
-        cout << "1 - work with routes\n2 - work with string and file threads\ne - exit\n";
+        cout << "1 - work with routes\n2 - find all strings without double digits\ne - exit\n";
 
         char c = enterSymbol();
 
@@ -25,7 +27,11 @@ int main(){
             break;
 
         case '2':
+        {
+            std::string filePath = "input2.txt";
+            finder.printNoDoubleDigitsString(filePath);
             break;
+        }
 
         case 'e':
             exitWhile = true;
