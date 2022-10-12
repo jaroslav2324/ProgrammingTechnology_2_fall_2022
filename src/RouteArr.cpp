@@ -38,9 +38,10 @@ void RouteArr::enterArr(){
 
 void RouteArr::readArrFromFile(std::string& filePath){
 
+    std::fstream file;
+
     try{
 
-        std::fstream file;
         file.open(filePath, std::ios::in);
         if (! file.is_open())
             throw NoFileExistsError();
@@ -61,6 +62,7 @@ void RouteArr::readArrFromFile(std::string& filePath){
             routesArr[i]->setDestinationName(destinationName);
             routesArr[i]->setNumRoute(numRoute);
         }
+        file.close();
 
     }
     catch(NoFileExistsError& err){
@@ -69,6 +71,7 @@ void RouteArr::readArrFromFile(std::string& filePath){
     }
     catch(WrongFileContentError& err){
         cout << "File " << filePath << " is corrupted" << endl;
+        file.close();
         waitAnyKeyAndNewLine();
     }
 }
@@ -130,7 +133,7 @@ while (true){
     bool exitWhile = false;
 
     clearTerminal();
-    cout << "1 - Enter routes from keyboard\n2-Enter routes from file\n";
+    cout << "1 - Enter routes from keyboard\n2 - Enter routes from file\n";
 
         char c = enterSymbol();
 
@@ -168,7 +171,8 @@ while (true){
     bool exitWhile = false;
 
     clearTerminal();
-    cout << "1 - enter routes\n2 - print routes\n3 - print routes with source name\n4 - print routes with destination name\nb - go back\n";
+    cout << "1 - enter routes\n2 - print routes\n3 - print routes with source name\n4 - print routes with destination name\n5 - print chosen route\n\
+6 - choose route\n7 - change source name of chosen route\n8 - change destination name of chosen route\n9 - change number of route\nb - go back\n";
 
     char c = enterSymbol();
 
@@ -208,6 +212,63 @@ while (true){
         clearTerminal();
         printRoutesWithDestinationName(destinationName);
         waitAnyKeyAndNewLine();
+        break;
+    }
+    case '5':
+        {
+        clearTerminal();
+
+        cout << routesArr[indexChosenRoute]->getNumRoute() << " " << routesArr[indexChosenRoute]->getSourceName() <<
+         "->" << routesArr[indexChosenRoute]->getDestinationName() << "\n";
+
+        waitAnyKeyAndNewLine();
+        break;
+    }
+    case '6':
+    {
+        clearTerminal();
+        cout << "Chosen route is " << indexChosenRoute << endl;
+        cout << "Enter index(0-7) of new route:" << endl;
+        int index = enterInt();
+        if (index < 0 || 7 < index){
+            cout << "Wrong index!" << endl;
+            waitAnyKeyAndNewLine();
+            break;
+        }
+        indexChosenRoute = index;
+        break;
+    }
+    case '7':
+    {
+        std::string sourceName;
+
+        clearTerminal();
+        cout << "Enter source name" << endl;
+        sourceName = enterString();
+
+        routesArr[indexChosenRoute]->setSourceName(sourceName);
+        break;
+    }
+    case '8':
+    {
+        std::string destinationName;
+
+        clearTerminal();
+        cout << "Enter destination name" << endl;
+        destinationName = enterString();
+
+        routesArr[indexChosenRoute]->setDestinationName(destinationName);
+        break;
+    }
+    case '9':
+    {
+        int number;
+
+        clearTerminal();
+        cout << "Enter number of route" << endl;
+        number = enterInt();
+
+        routesArr[indexChosenRoute]->setNumRoute(number);
         break;
     }
     case 'b':

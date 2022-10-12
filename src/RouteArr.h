@@ -27,5 +27,7 @@ class RouteArr{
     void printRoutesWithSourceName(std::string& sourceName);
     void printRoutesWithDestinationName(std::string& destinationName);
 
+    int indexChosenRoute = 0;
+
     Route** routesArr = nullptr;
 };
