@@ -269,6 +269,8 @@ while (true){
         number = enterInt();
 
         routesArr[indexChosenRoute]->setNumRoute(number);
+        sortRoutesByNumber();
+        
         break;
     }
     case 'b':
